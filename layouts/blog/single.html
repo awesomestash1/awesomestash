@@ -8,7 +8,7 @@
         <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" />
       </div>
       {{ end }}
-      
+
       <div class="blog-hero-content">
         <div class="blog-meta">
           <time datetime="{{ .Date.Format "2006-01-02" }}">
@@ -19,13 +19,13 @@
           {{ end }}
           <span class="reading-time">📖 {{ .ReadingTime }} min read</span>
         </div>
-        
+
         <h1 class="blog-title">{{ .Title }}</h1>
-        
+
         {{ if .Params.description }}
         <p class="blog-description">{{ .Params.description }}</p>
         {{ end }}
-        
+
         {{ if .Params.tags }}
         <div class="blog-tags">
           {{ range .Params.tags }}
@@ -35,12 +35,12 @@
         {{ end }}
       </div>
     </div>
-    
+
     <!-- Main Content -->
     <div class="blog-content">
       {{ .Content }}
     </div>
-    
+
     <!-- Tags at bottom of post -->
     {{ if .Params.tags }}
     <div class="post-bottom-tags">
@@ -52,7 +52,7 @@
       </div>
     </div>
     {{ end }}
-    
+
     <!-- Author Info -->
     {{ if .Params.author }}
     <div class="author-info">
@@ -71,7 +71,7 @@
       </div>
     </div>
     {{ end }}
-    
+
     <!-- Navigation -->
     <nav class="blog-navigation">
       {{ if .PrevInSection }}
@@ -79,7 +79,7 @@
         ← {{ .PrevInSection.Title }}
       </a>
       {{ end }}
-      
+
       {{ if .NextInSection }}
       <a href="{{ .NextInSection.Permalink }}" class="nav-next">
         {{ .NextInSection.Title }} →
@@ -237,7 +237,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: #f8f9fa;
+  background: rgba(102, 126, 234, 0.1);
   padding: 1.5rem;
   border-radius: 12px;
   margin: 2rem 0;
@@ -261,7 +261,7 @@
 
 .author-details h4 {
   margin: 0 0 0.5rem 0;
-  color: #333;
+  color: #a855f7;
 }
 
 .author-details p {
@@ -324,15 +324,15 @@
   .blog-title {
     font-size: 2rem;
   }
-  
+
   .blog-meta {
     font-size: 0.8rem;
   }
-  
+
   .blog-navigation {
     flex-direction: column;
   }
-  
+
   .author-info {
     flex-direction: column;
     text-align: center;
