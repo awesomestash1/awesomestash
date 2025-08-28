@@ -1,6 +1,7 @@
-.env
-.netlify
+# Hugo output
+public/
+resources/
 .hugo_build.lock
-node_modules
-public
-resources
+
+# Editor
+.vscode/
