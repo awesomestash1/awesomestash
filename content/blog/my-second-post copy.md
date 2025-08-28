@@ -1,0 +1,17 @@
+---
+title: "My Second Post Copy"
+date: 2025-08-28T19:38:34+07:00
+draft: false
+description: "This the second short summary of my post that will appear on the blog listing page."
+author: "Awesome Stash"
+tags: ["Hugo", "Beginner", "Tech"]
+---
+
+## Welcome to My Second Post
+
+This is the content of my very first post, written in Markdown. It's easy to add lists:
+
+* Item one
+* Item two
+
+And also to add **bold** or *italic* text.

@@ -29,25 +29,29 @@
         {{ if .Params.tags }}
         <div class="blog-tags">
           {{ range .Params.tags }}
-          <span class="tag">#{{ . }}</span>
+          <a href="/tags/{{ . | urlize }}/" class="tag-link">#{{ . }}</a>
           {{ end }}
         </div>
         {{ end }}
       </div>
     </div>
     
-    <!-- Table of Contents -->
-    {{ if .TableOfContents }}
-    <div class="table-of-contents">
-      <h3>📋 Table of Contents</h3>
-      {{ .TableOfContents }}
-    </div>
-    {{ end }}
-    
     <!-- Main Content -->
     <div class="blog-content">
       {{ .Content }}
     </div>
+    
+    <!-- Tags at bottom of post -->
+    {{ if .Params.tags }}
+    <div class="post-bottom-tags">
+      <h4>Tags:</h4>
+      <div class="tags-list">
+        {{ range .Params.tags }}
+        <a href="/tags/{{ . | urlize }}/" class="bottom-tag">#{{ . }}</a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
     
     <!-- Author Info -->
     {{ if .Params.author }}
@@ -153,25 +157,28 @@
   flex-wrap: wrap;
 }
 
-.tag {
+.tag-link {
   background: rgba(255,255,255,0.2);
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
   font-size: 0.8rem;
   font-weight: 500;
+  color: white !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.table-of-contents {
-  background: rgba(102, 126, 234, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  border-left: 4px solid #667eea;
+.tag-link:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.05);
+  color: white !important;
 }
 
 .blog-content {
   line-height: 1.8;
   font-size: 1.1rem;
+  margin-bottom: 2rem;
 }
 
 .blog-content h2, .blog-content h3 {
@@ -189,6 +196,41 @@
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-size: 0.9rem;
+}
+
+.post-bottom-tags {
+  background: rgba(102, 126, 234, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.post-bottom-tags h4 {
+  margin: 0 0 1rem 0;
+  color: #667eea;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.bottom-tag {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white !important;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.bottom-tag:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  color: white !important;
 }
 
 .author-info {
@@ -217,6 +259,16 @@
   font-weight: bold;
 }
 
+.author-details h4 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.author-details p {
+  margin: 0;
+  color: #666;
+}
+
 .blog-navigation {
   display: flex;
   justify-content: space-between;
@@ -238,6 +290,34 @@
 
 .nav-prev:hover, .nav-next:hover {
   transform: translateY(-2px);
+  color: white;
+}
+
+/* Dark mode styles */
+.author-info:is(html[class~="dark"] *) {
+  background: #374151;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.author-details h4:is(html[class~="dark"] *) {
+  color: #f9fafb;
+}
+
+.author-details p:is(html[class~="dark"] *) {
+  color: #d1d5db;
+}
+
+.blog-content code:is(html[class~="dark"] *) {
+  background: #374151;
+  color: #f9fafb;
+}
+
+.post-bottom-tags:is(html[class~="dark"] *) {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+.post-bottom-tags h4:is(html[class~="dark"] *) {
+  color: #a855f7;
 }
 
 @media (max-width: 768px) {
@@ -251,6 +331,11 @@
   
   .blog-navigation {
     flex-direction: column;
+  }
+  
+  .author-info {
+    flex-direction: column;
+    text-align: center;
   }
 }
 </style>

@@ -3,7 +3,7 @@ title: "My Second Post"
 date: 2025-08-28T19:38:34+07:00
 draft: false
 description: "This the second short summary of my post that will appear on the blog listing page."
-author: "Your Name"
+author: "Awesome Stash"
 tags: ["Hugo", "Beginner", "Tech"]
 ---
 
