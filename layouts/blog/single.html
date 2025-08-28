@@ -1,0 +1,257 @@
+{{ define "main" }}
+<div class="blog-post-container">
+  <article class="blog-post">
+    <!-- Hero Section -->
+    <div class="blog-hero">
+      {{ if .Params.featured_image }}
+      <div class="blog-hero-image">
+        <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" />
+      </div>
+      {{ end }}
+      
+      <div class="blog-hero-content">
+        <div class="blog-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">
+            📅 {{ .Date.Format "January 2, 2006" }}
+          </time>
+          {{ if .Params.author }}
+          <span class="author">✍️ {{ .Params.author }}</span>
+          {{ end }}
+          <span class="reading-time">📖 {{ .ReadingTime }} min read</span>
+        </div>
+        
+        <h1 class="blog-title">{{ .Title }}</h1>
+        
+        {{ if .Params.description }}
+        <p class="blog-description">{{ .Params.description }}</p>
+        {{ end }}
+        
+        {{ if .Params.tags }}
+        <div class="blog-tags">
+          {{ range .Params.tags }}
+          <span class="tag">#{{ . }}</span>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    
+    <!-- Table of Contents -->
+    {{ if .TableOfContents }}
+    <div class="table-of-contents">
+      <h3>📋 Table of Contents</h3>
+      {{ .TableOfContents }}
+    </div>
+    {{ end }}
+    
+    <!-- Main Content -->
+    <div class="blog-content">
+      {{ .Content }}
+    </div>
+    
+    <!-- Author Info -->
+    {{ if .Params.author }}
+    <div class="author-info">
+      <div class="author-avatar">
+        {{ if .Params.author_image }}
+        <img src="{{ .Params.author_image }}" alt="{{ .Params.author }}" />
+        {{ else }}
+        <div class="avatar-placeholder">{{ substr .Params.author 0 1 }}</div>
+        {{ end }}
+      </div>
+      <div class="author-details">
+        <h4>{{ .Params.author }}</h4>
+        {{ if .Params.author_bio }}
+        <p>{{ .Params.author_bio }}</p>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+    
+    <!-- Navigation -->
+    <nav class="blog-navigation">
+      {{ if .PrevInSection }}
+      <a href="{{ .PrevInSection.Permalink }}" class="nav-prev">
+        ← {{ .PrevInSection.Title }}
+      </a>
+      {{ end }}
+      
+      {{ if .NextInSection }}
+      <a href="{{ .NextInSection.Permalink }}" class="nav-next">
+        {{ .NextInSection.Title }} →
+      </a>
+      {{ end }}
+    </nav>
+  </article>
+</div>
+
+<style>
+.blog-post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.blog-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.blog-hero-image {
+  margin-bottom: 2rem;
+}
+
+.blog-hero-image img {
+  max-width: 200px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.blog-meta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.blog-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.blog-description {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.blog-tags {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: rgba(255,255,255,0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.table-of-contents {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid #667eea;
+}
+
+.blog-content {
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.blog-content h2, .blog-content h3 {
+  color: #667eea;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content p {
+  margin-bottom: 1.5rem;
+}
+
+.blog-content code {
+  background: #f8f9fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.author-avatar img, .avatar-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.avatar-placeholder {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.blog-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.nav-prev, .nav-next {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  min-width: 200px;
+}
+
+.nav-prev:hover, .nav-next:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .blog-title {
+    font-size: 2rem;
+  }
+  
+  .blog-meta {
+    font-size: 0.8rem;
+  }
+  
+  .blog-navigation {
+    flex-direction: column;
+  }
+}
+</style>
+{{ end }}
