@@ -1,5 +1,5 @@
 title = "Awesome Stash"
-baseurl = "http://localhost/"
+baseurl = "https://www.awesomestash.com"
 disableAliases = true
 disableHugoGeneratorInject = true
 # disableKinds = ["taxonomy", "term"]
